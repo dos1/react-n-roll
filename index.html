@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=1024" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <title>AngularJS application architecture | Slideshow for talk on 3rd AngularJS Meetup in Poznań, 7th August 2014 | by Eryk Napierała @erykpiast</title>
-        
+
         <meta name="description" content="Slideshow for talk on 3rd AngularJS Meetup in Poznań, 7th August 2014" />
         <meta name="author" content="Eryk Napierała" />
 
@@ -13,9 +13,15 @@
 
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" />
         <link href="//cdnjs.cloudflare.com/ajax/libs/prism/0.0.1/prism.min.css" rel="stylesheet" />
+
         <link href="css/base.css" rel="stylesheet" />
         <link href="css/utc.css" rel="stylesheet" />
-        
+
+
+        <script src="https://fb.me/react-0.13.1.js"></script>
+        <script src="https://fb.me/JSXTransformer-0.13.1.js"></script>
+
+
         <link rel="shortcut icon" href="images/favicon.ico" />
     </head>
 
@@ -30,14 +36,15 @@
 
             <section id="slide1" class="step slide">
                 <header class="page-header huge text-center">
-                    <h1>AngularJS application architecture</h1>
+                    <h1>React.js</h1>
+                    <h2>Introduction</h2>
                 </header>
                 <div class="author text-center">
-                    <a href="https://github.com/erykpiast" rel="author">Eryk Napierała</a>@<a href="https://github.com/UsabilityTools">UsabilityTools.com</a>
+                    <a href="http://dosowisko.net/" rel="author">Sebastian Krzyszkowiak</a>@<a href="https://github.com/UsabilityTools">UsabilityTools.com</a>
                 </div>
                 <footer class="page-footer text-right">
                     <small>
-                        <time datetime="2014-08-07">August 7th, 2014</time><br/>
+                        <time datetime="2015-03-25">March 25th, 2015</time><br/>
                         Poznań
                     </small>
                 </footer>
@@ -47,7 +54,7 @@
                 <header class="page-header text-center">
                     <h2>Framework is just a tool</h2>
                 </header>
-                
+
                 <p>
                     And as every another tool, you can use it well or wrong.
                 </p>
@@ -56,7 +63,7 @@
                 </p>
             </section>
 
-            <section id="slide3" class="step slide">
+            <section id="slide3" class="step slide subslide">
                 <p class="big text-center" style="margin-top: 20%">
                     How to use Angular well?
                 </p>
@@ -65,7 +72,7 @@
                 </p>
             </section>
 
-            <section id="slide4" class="step slide">
+            <section id="slide4" class="step slide subslide">
                 <p class="big center">
                     <strong>Let's start planning!</strong>
                 </p>
@@ -75,7 +82,7 @@
                 <header class="page-header text-center">
                     <h2>Seed hunting</h2>
                 </header>
-                
+
                 <p class="text-center">
                     <a href="https://github.com/search?q=angular+seed&ref=cmdform">
                         <img src="images/github-angular-seed_01.png" width="100%" >
@@ -83,11 +90,11 @@
                 </p>
             </section>
 
-            <section id="slide6" class="step slide">
+            <section id="slide6" class="step slide subslide">
                 <header class="page-header text-center">
                     <h2>Seed hunting – common structure</h2>
                 </header>
-                
+
                 <p class="text-center">
                     <a href="images/structure-common.png">
                         <img src="images/structure-common.png" height="100%" >
@@ -95,11 +102,11 @@
                 </p>
             </section>
 
-            <section id="slide7" class="step slide">
+            <section id="slide7" class="step slide subslide">
                 <header class="page-header text-center">
                     <h2>Seed hunting – common structure</h2>
                 </header>
-                
+
                 <p>Pros</p>
                 <ul>
                     <li>easy to start and add new features fast</li>
@@ -125,7 +132,7 @@
                 <header class="page-header text-center">
                     <h2>UsabilityTools.com app structure</h2>
                 </header>
-                
+
                 <p class="text-center">
                     <a href="images/structure-utc-overview.png">
                         <img src="images/structure-utc-overview_m.png" height="500px" >
@@ -137,7 +144,7 @@
                 <header class="page-header text-center">
                     <h2>State</h2>
                 </header>
-                
+
                 <p class="text-center">
                     <a href="images/structure-utc-state.png">
                         <img src="images/structure-utc-state.png" height="500px" >
@@ -145,11 +152,11 @@
                 </p>
             </section>
 
-            <section id="slide11" class="step slide">
+            <section id="slide11" class="step slide subslide">
                 <header class="page-header text-center">
                     <h2>State</h2>
                 </header>
-                
+
                 <ul>
                     <li>can have views (or be an abstract)</li>
                     <li>can have substates</li>
@@ -160,11 +167,11 @@
                 </ul>
             </section>
 
-            <section id="slide12" class="step slide">
+            <section id="slide12" class="step slide subslide">
                 <header class="page-header text-center">
                     <h2>State – root</h2>
                 </header>
-                
+
                 <pre class="code-listing">
                     <code class="language-javascript">
     define([
@@ -233,11 +240,11 @@
                 </pre>
             </section>
 
-            <section id="slide13" class="step slide">
+            <section id="slide13" class="step slide subslide">
                 <header class="page-header text-center">
                     <h2>State – root.project</h2>
                 </header>
-                
+
                 <pre class="code-listing">
                     <code class="language-javascript">
     angular.module('app.project.state', features.toggle([
@@ -265,11 +272,11 @@
                 </pre>
             </section>
 
-            <section id="slide14" class="step slide">
+            <section id="slide14" class="step slide subslide">
                 <header class="page-header text-center">
                     <h2>State – root.project.one</h2>
                 </header>
-                
+
                 <pre class="code-listing">
                     <code class="language-javascript">
     var stateName = 'root.project.one';
@@ -336,7 +343,7 @@
                 <header class="page-header text-center">
                     <h2>View</h2>
                 </header>
-                
+
                 <p class="text-center">
                     <a href="images/wireframe-simple.png">
                         <img src="images/wireframe-simple.png" height="500px" >
@@ -344,11 +351,11 @@
                 </p>
             </section>
 
-            <section id="slide16" class="step slide">
+            <section id="slide16" class="step slide subslide">
                 <header class="page-header text-center">
                     <h2>View</h2>
                 </header>
-                
+
                 <p class="text-center">
                     <a href="images/wireframe-complicated.png">
                         <img src="images/wireframe-complicated.png" height="500px" >
@@ -356,11 +363,11 @@
                 </p>
             </section>
 
-            <section id="slide17" class="step slide">
+            <section id="slide17" class="step slide subslide">
                 <header class="page-header text-center">
                     <h2>View</h2>
                 </header>
-                
+
                 <p class="text-center">
                     <a href="images/structure-utc-view.png">
                         <img src="images/structure-utc-view.png" height="500px" >
@@ -368,11 +375,11 @@
                 </p>
             </section>
 
-            <section id="slide18" class="step slide">
+            <section id="slide18" class="step slide subslide">
                 <header class="page-header text-center">
                     <h2>View</h2>
                 </header>
-                
+
                 <ul>
                     <li>defines pair template-controller and exposes it for state</li>
                     <li>can define its own components</li>
@@ -381,11 +388,11 @@
                 </ul>
             </section>
 
-            <section id="slide19" class="step slide">
+            <section id="slide19" class="step slide subslide">
                 <header class="page-header text-center">
                     <h2>View – project__list__content</h2>
                 </header>
-                
+
                 <pre class="code-listing">
                     <code class="language-javascript">
     define([
@@ -418,11 +425,11 @@
                 </pre>
             </section>
 
-            <section id="slide20" class="step slide">
+            <section id="slide20" class="step slide subslide">
                 <header class="page-header text-center">
                     <h2>View – component</h2>
                 </header>
-                
+
                 <ul>
                     <li>can use components defined by all its ancestors (view, state, grand-state etc.)</li>
                     <li>controllers manages single template</li>
@@ -431,11 +438,11 @@
                 </ul>
             </section>
 
-            <section id="slide21" class="step slide">
+            <section id="slide21" class="step slide subslide">
                 <header class="page-header text-center">
                     <h2>View controller – project__list__content</h2>
                 </header>
-                
+
                 <pre class="code-listing">
                     <code class="language-javascript">
     define([
@@ -456,7 +463,7 @@
                 <header class="page-header text-center">
                     <h2>Shared components</h2>
                 </header>
-                
+
                 <ul>
                     <li>can use components defined by all its ancestors (view, state, grand-state etc.)</li>
                     <li>no controllers!</li>
@@ -469,7 +476,7 @@
                 <header class="page-header text-center">
                     <h2>Naming conventions</h2>
                 </header>
-                
+
                 <p>For files</p>
                 <ul>
                     <li>*.module.js, *.directive.js, *.service.js</li>
@@ -487,7 +494,7 @@
                 <header class="page-header text-center">
                     <h2>Build process</h2>
                 </header>
-                
+
                 <ul>
                     <li>configuration of single task in separate file (see <a href="https://www.npmjs.org/package/load-grunt-configs">load-grunt-configs</a>)</li>
                     <li>meaningless tasks are grouped (ex. <a href="https://www.npmjs.org/package/grunt-nestedtasksrunner">grunt-nestedtasksrunner</a>)</li>
@@ -501,11 +508,11 @@
                 </p>
             </section>
 
-            <section id="slide26" class="step slide">
+            <section id="slide26" class="step slide subslide">
                 <header class="page-header text-center">
                     <h2>Damn easy feature toggle!</h2>
                 </header>
-                
+
                 <p class="text-center">
                     <a href="images/structure-utc-feature-toggle.png">
                         <img src="images/structure-utc-feature-toggle.png" height="500px" >
@@ -513,11 +520,11 @@
                 </p>
             </section>
 
-            <section id="slide27" class="step slide">
+            <section id="slide27" class="step slide subslide">
                 <header class="page-header text-center">
                     <h2>Damn fast finding files!</h2>
                 </header>
-                
+
                 <p class="text-center">
                     <a href="images/structure-utc-finding-files.png">
                         <img src="images/structure-utc-finding-files.png" height="500px" >
@@ -525,11 +532,11 @@
                 </p>
             </section>
 
-            <section id="slide28" class="step slide">
+            <section id="slide28" class="step slide subslide">
                 <header class="page-header text-center">
                     <h2>All is all right</h2>
                 </header>
-                
+
                 <ul>
                     <li>easy to determine which components are required for particular feature</li>
                     <li>clear connections between components</li>
@@ -542,7 +549,7 @@
                 <header class="page-header text-center">
                     <h2>Pitfails or trade offs?</h2>
                 </header>
-                
+
                 <p class="big center">
                     <strong>Tell me!</strong>
                 </p>
@@ -559,7 +566,7 @@
             </section>
 
             <section id="slide31" class="step slide">
-                
+
                 <p class="big center">
                     <strong>Thank you!</strong><br>
                     <small style="font-size: 50%;">
@@ -585,9 +592,19 @@
         <script>
             var contentIndex = [ ];
 
+            var subSlideIdx = 0, subSlideCount = 0;
+
             Array.prototype.forEach.call(document.querySelectorAll('[id^="slide"]'), function(slide, index) {
-                slide.setAttribute('data-y', '-1500');
-                slide.setAttribute('data-x', -1500 + (index * 1500));
+                if (slide.classList.contains('subslide')) {
+									subSlideIdx++;
+									subSlideCount++;
+                } else {
+									subSlideIdx = 0;
+                }
+
+                slide.setAttribute('data-y', - ((index - subSlideCount) * 600));
+                slide.setAttribute('data-x', (index * 1000) + (subSlideCount * 150));
+                slide.setAttribute('data-z', -1500 + ((index - subSlideCount) * 1500));
 
                 var header = slide.querySelector('.page-header > h2');
 
@@ -608,19 +625,19 @@
         <script>
         /*
 				 T he M*IT License (MIT)
-				 
+
 				 Copyright (c) 2014 Chris Wilson
-				 
+
 				 Permission is hereby granted, free of charge, to any person obtaining a copy
 				 of this software and associated documentation files (the "Software"), to deal
 				 in the Software without restriction, including without limitation the rights
 				 to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 				 copies of the Software, and to permit persons to whom the Software is
 				 furnished to do so, subject to the following conditions:
-				 
+
 				 The above copyright notice and this permission notice shall be included in all
 				 copies or substantial portions of the Software.
-				 
+
 				 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 				 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 				 FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -630,20 +647,20 @@
 				 SOFTWARE.
 				 */
 				(function() {
-					
+
 					var audioContext = null;
 					var meter = null;
 					var canvasContext = null;
 					var WIDTH=500;
 					var HEIGHT=50;
 					var rafID = null;
-					
-					
+
+
 					/*
-					 * 
+					 *
 					 * Usage:
 					 * audioNode = createAudioMeter(audioContext,clipLevel,averaging,clipLag);
-					 * 
+					 *
 					 * audioContext: the AudioContext you're using.
 					 * clipLevel: the level (0 to 1) that you would consider "clipping".
 					 *   Defaults to 0.98.
@@ -651,10 +668,10 @@
 					 *   Should be between 0 and less than 1.  Defaults to 0.95.
 					 * clipLag: how long you would like the "clipping" indicator to show
 					 *   after clipping has occured, in milliseconds.  Defaults to 750ms.
-					 * 
+					 *
 					 * Access the clipping through node.checkClipping(); use node.shutdown to get rid of it.
 					 */
-					
+
 					function createAudioMeter(audioContext,clipLevel,averaging,clipLag) {
 						var processor = audioContext.createScriptProcessor(512);
 						processor.onaudioprocess = volumeAudioProcess;
@@ -664,36 +681,36 @@
 						processor.clipLevel = clipLevel || 0.98;
 						processor.averaging = averaging || 0.95;
 						processor.clipLag = clipLag || 250;
-						
+
 						// this will have no effect, since we don't copy the input to the output,
 						// but works around a current Chrome bug.
 						processor.connect(audioContext.destination);
-						
+
 						processor.checkClipping =
 						function(){
 							if (!this.clipping)
 								return false;
 							if ((this.lastClip + this.clipLag) < window.performance.now())
 								this.clipping = false;
-							
+
 							return this.clipping;
 						};
-						
+
 						processor.shutdown =
 						function(){
 							this.disconnect();
 							this.onaudioprocess = null;
 						};
-						
+
 						return processor;
 					}
-					
+
 					function volumeAudioProcess( event ) {
 						var buf = event.inputBuffer.getChannelData(0);
 						var bufLength = buf.length;
 						var sum = 0;
 						var x;
-						
+
 						// Do a root-mean-square on the samples: sum up the squares...
 						for (var i=0; i<bufLength; i++) {
 							x = buf[i];
@@ -703,35 +720,35 @@
 							}
 							sum += x * x;
 						}
-						
+
 						// ... then take the square root of the sum.
 						var rms =  Math.sqrt(sum / bufLength);
-						
+
 						// Now smooth this out with the averaging factor applied
 						// to the previous sample - take the max here because we
 						// want "fast attack, slow release."
 						this.volume = Math.max(rms, this.volume*this.averaging);
 					}
-					
+
 					window.onload = function() {
-						
+
 						// grab our canvas
 						//canvasContext = document.getElementById( "meter" ).getContext("2d");
-						
+
 						// monkeypatch Web Audio
 						window.AudioContext = window.AudioContext || window.webkitAudioContext;
-						
+
 						// grab an audio context
 						audioContext = new AudioContext();
-						
+
 						// Attempt to get audio input
 						try {
 							// monkeypatch getUserMedia
-							navigator.getUserMedia = 
+							navigator.getUserMedia =
 							navigator.getUserMedia ||
 							navigator.webkitGetUserMedia ||
 							navigator.mozGetUserMedia;
-							
+
 							// ask for an audio input
 							navigator.getUserMedia(
 								{
@@ -748,30 +765,30 @@
 						} catch (e) {
 							alert('getUserMedia threw exception :' + e);
 						}
-						
+
 					}
-					
-					
+
+
 					function didntGetStream() {
 						alert('Stream generation failed.');
 					}
-					
+
 					var mediaStreamSource = null;
-					
+
 					function gotStream(stream) {
 						// Create an AudioNode from the stream.
 						mediaStreamSource = audioContext.createMediaStreamSource(stream);
-						
+
 						// Create a new volume meter and connect it.
 						meter = createAudioMeter(audioContext);
 						mediaStreamSource.connect(meter);
-						
+
 						// kick off the visual updating
 						drawLoop();
 					}
-					
+
 					var lastNotClip = 0;
-					
+
 					function nextSlideChecker(clip) {
 						console.log(clip);
 						if (!clip) lastNotClip = window.performance.now();
@@ -782,11 +799,11 @@
 					 }
 				 }
 					}
-					
+
 					function drawLoop( time ) {
 						// clear the background
 						//canvasContext.clearRect(0,0,WIDTH,HEIGHT);
-						
+
 						// check if we're currently clipping
 						if (meter.checkClipping()) {
 							//canvasContext.fillStyle = "red";
@@ -795,14 +812,14 @@
 							//canvasContext.fillStyle = "green";
 							nextSlideChecker(false);
 						}
-						
+
 						// draw a bar based on the current volume
 						//canvasContext.fillRect(0, 0, meter.volume*WIDTH*1.4, HEIGHT);
-						
+
 						// set up the next visual callback
 						rafID = window.requestAnimationFrame( drawLoop );
 					}
-					
+
 				})();
         </script>
     </body>
