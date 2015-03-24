@@ -1,0 +1,809 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=1024" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <title>AngularJS application architecture | Slideshow for talk on 3rd AngularJS Meetup in Poznań, 7th August 2014 | by Eryk Napierała @erykpiast</title>
+        
+        <meta name="description" content="Slideshow for talk on 3rd AngularJS Meetup in Poznań, 7th August 2014" />
+        <meta name="author" content="Eryk Napierała" />
+
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:regular,semibold,italic,italicsemibold|PT+Sans:400,700,400italic,700italic|PT+Serif:400,700,400italic,700italic" rel="stylesheet" />
+
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="//cdnjs.cloudflare.com/ajax/libs/prism/0.0.1/prism.min.css" rel="stylesheet" />
+        <link href="css/base.css" rel="stylesheet" />
+        <link href="css/utc.css" rel="stylesheet" />
+        
+        <link rel="shortcut icon" href="images/favicon.ico" />
+    </head>
+
+    <body class="impress-not-supported">
+
+        <div class="fallback-message">
+            <p>Your browser <b>doesn't support the features required</b> by impress.js, so you are presented with a simplified version of this presentation.</p>
+            <p>For the best experience please use the latest <b>Chrome</b>, <b>Safari</b> or <b>Firefox</b> browser.</p>
+        </div>
+
+        <div id="impress">
+
+            <section id="slide1" class="step slide">
+                <header class="page-header huge text-center">
+                    <h1>AngularJS application architecture</h1>
+                </header>
+                <div class="author text-center">
+                    <a href="https://github.com/erykpiast" rel="author">Eryk Napierała</a>@<a href="https://github.com/UsabilityTools">UsabilityTools.com</a>
+                </div>
+                <footer class="page-footer text-right">
+                    <small>
+                        <time datetime="2014-08-07">August 7th, 2014</time><br/>
+                        Poznań
+                    </small>
+                </footer>
+            </section>
+
+            <section id="slide2" class="step slide">
+                <header class="page-header text-center">
+                    <h2>Framework is just a tool</h2>
+                </header>
+                
+                <p>
+                    And as every another tool, you can use it well or wrong.
+                </p>
+                <p class="text-center">
+                    <strong>Angular isn't an exception.</strong>
+                </p>
+            </section>
+
+            <section id="slide3" class="step slide">
+                <p class="big text-center" style="margin-top: 20%">
+                    How to use Angular well?
+                </p>
+                <p class="big text-center">
+                    How to build a webapp, that you can develop fast and painless <strong>even after prototyping phase</strong>?
+                </p>
+            </section>
+
+            <section id="slide4" class="step slide">
+                <p class="big center">
+                    <strong>Let's start planning!</strong>
+                </p>
+            </section>
+
+            <section id="slide5" class="step slide">
+                <header class="page-header text-center">
+                    <h2>Seed hunting</h2>
+                </header>
+                
+                <p class="text-center">
+                    <a href="https://github.com/search?q=angular+seed&ref=cmdform">
+                        <img src="images/github-angular-seed_01.png" width="100%" >
+                    </a>
+                </p>
+            </section>
+
+            <section id="slide6" class="step slide">
+                <header class="page-header text-center">
+                    <h2>Seed hunting – common structure</h2>
+                </header>
+                
+                <p class="text-center">
+                    <a href="images/structure-common.png">
+                        <img src="images/structure-common.png" height="100%" >
+                    </a>
+                </p>
+            </section>
+
+            <section id="slide7" class="step slide">
+                <header class="page-header text-center">
+                    <h2>Seed hunting – common structure</h2>
+                </header>
+                
+                <p>Pros</p>
+                <ul>
+                    <li>easy to start and add new features fast</li>
+                </ul>
+                <p>Cons:</p>
+                <ul>
+                    <li>every component can use all others</li>
+                    <li>hard to define components of single feature</li>
+                    <li>potentially messed communication</li>
+                    <li>unclear dependency tree</li>
+                    <li>main module have to manage everything (dependencies, configuration, routes, etc.)</li>
+                </ul>
+            </section>
+
+            <section id="slide8" class="step slide">
+                <p class="big center">
+                    <strong>We want to avoid problems that we already perceived</strong><br/>
+                    (and we don't like to be common!)
+                </p>
+            </section>
+
+            <section id="slide9" class="step slide">
+                <header class="page-header text-center">
+                    <h2>UsabilityTools.com app structure</h2>
+                </header>
+                
+                <p class="text-center">
+                    <a href="images/structure-utc-overview.png">
+                        <img src="images/structure-utc-overview_m.png" height="500px" >
+                    </a>
+                </p>
+            </section>
+
+            <section id="slide10" class="step slide">
+                <header class="page-header text-center">
+                    <h2>State</h2>
+                </header>
+                
+                <p class="text-center">
+                    <a href="images/structure-utc-state.png">
+                        <img src="images/structure-utc-state.png" height="500px" >
+                    </a>
+                </p>
+            </section>
+
+            <section id="slide11" class="step slide">
+                <header class="page-header text-center">
+                    <h2>State</h2>
+                </header>
+                
+                <ul>
+                    <li>can have views (or be an abstract)</li>
+                    <li>can have substates</li>
+                    <li>can define common components for its views and substates</li>
+                    <li>depends on its ancestors</li>
+                    <li>doesn't depend on its children</li>
+                    <li>manages dependencies, routes and configuration that it needs</li>
+                </ul>
+            </section>
+
+            <section id="slide12" class="step slide">
+                <header class="page-header text-center">
+                    <h2>State – root</h2>
+                </header>
+                
+                <pre class="code-listing">
+                    <code class="language-javascript">
+    define([
+        'angular',
+
+        'common/helpers/features/features',
+
+        './sub/project/project.state.module',
+        './sub/user/user.state.module',
+
+        './views/header/root__header.view.module',
+        './views/footer/root__footer.view.module',
+        './views/sidebar/root__sidebar.view.module',
+        './views/content/root__content.view.module',
+
+        'ui.router',
+        'restangular'
+    ], function (
+        angular,
+
+        features,
+
+        MProjectState,
+        MUserState,
+
+        MRootFooterView,
+        MRootHeaderView,
+        MRootSidebarView,
+        MRootContentView
+        ) {
+
+        angular.module('app.root.state', features.toggle([
+            (features.active('project') && MProjectState.name),
+            (features.active('user') && MUserState.name),
+
+            MRootHeaderView.name,
+            MRootFooterView.name,
+            MRootSidebarView.name,
+            MRootContentView.name,
+
+            'ui.router',
+            'restangular'
+        ]))
+        .config(function (
+            $stateProvider,
+
+            VRootHeader,
+            VRootFooter,
+            VRootSidebar,
+            VRootContent
+        ) {
+
+            $stateProvider
+                .state('root', {
+                    url: '/',
+                    views: {
+                        'header@': VRootHeader,
+                        'footer@': VRootFooter,
+                        'sidebar@': VRootSidebar,
+                        'content@': VRootContent
+                    }
+                });
+        });
+    });
+                    </code>
+                </pre>
+            </section>
+
+            <section id="slide13" class="step slide">
+                <header class="page-header text-center">
+                    <h2>State – root.project</h2>
+                </header>
+                
+                <pre class="code-listing">
+                    <code class="language-javascript">
+    angular.module('app.project.state', features.toggle([
+        (features.active('project.list') && MProjectListState.name),
+        (features.active('project.add') && MProjectAddState.name),
+        (features.active('project.one') && MProjectOneState.name),
+
+        'ui.router'
+    ]))
+    .config(function (
+        $stateProvider
+    ) {
+        $stateProvider
+            .state('root.authenticated.project', {
+                url: '/project',
+                abstract: true,
+                resolve: {
+                    RProject: function() {
+                        return MProjects.service('project');
+                    }
+                }
+            });
+    });
+                    </code>
+                </pre>
+            </section>
+
+            <section id="slide14" class="step slide">
+                <header class="page-header text-center">
+                    <h2>State – root.project.one</h2>
+                </header>
+                
+                <pre class="code-listing">
+                    <code class="language-javascript">
+    var stateName = 'root.project.one';
+
+    angular.module('app.project__one.state', features.toggle([
+        (features.active('project.one.recording') && MProjectOneRecordingState.name),
+        (features.active('project.one.script') && MProjectOneScriptState.name),
+        (features.active('project.one.edit') && MProjectOneEditState.name),
+
+        MProjectHeaderView.name,
+
+        'ui.router',
+        'restangular'
+    ]))
+    .config(function (
+        $stateProvider,
+        RestangularProvider,
+
+        VProjectOneHeader
+    ) {
+        $stateProvider
+            .state(stateName, {
+                url: '/{projectId:[0-9a-z]{4,}}',
+                abstract: true,
+                views: {
+                    'header@': VProjectOneHeader
+                },
+                resolve: {
+                    MProject: function(MProjects, $stateParams) {
+                        return MProjects.get($stateParams.projectId);
+                    }
+                },
+                onEnter: function(MProjects, $stateParams) {
+                    MProjects.current = MProjects.filter(function(project) {
+                        return (project.id === $stateParams.projectId);
+                    })[0];
+                },
+                onExit: function(MProjects) {
+                    MProjects.current = null;
+                }
+            });
+    })
+    .run(function(
+        $rootScope,
+        $state
+    ) {
+        $rootScope
+            .$on('$stateChangeError', function(e, toState) {
+                if(!e.defaultPrevented && (toState.name.indexOf(stateName) === 0)) {
+                    e.preventDefault();
+
+                    $state.go('^.list', { }, {
+                        location: 'replace',
+                        relative: stateName
+                    });
+                }
+            });
+    });
+                    </code>
+                </pre>
+            </section>
+
+            <section id="slide15" class="step slide">
+                <header class="page-header text-center">
+                    <h2>View</h2>
+                </header>
+                
+                <p class="text-center">
+                    <a href="images/wireframe-simple.png">
+                        <img src="images/wireframe-simple.png" height="500px" >
+                    </a>
+                </p>
+            </section>
+
+            <section id="slide16" class="step slide">
+                <header class="page-header text-center">
+                    <h2>View</h2>
+                </header>
+                
+                <p class="text-center">
+                    <a href="images/wireframe-complicated.png">
+                        <img src="images/wireframe-complicated.png" height="500px" >
+                    </a>
+                </p>
+            </section>
+
+            <section id="slide17" class="step slide">
+                <header class="page-header text-center">
+                    <h2>View</h2>
+                </header>
+                
+                <p class="text-center">
+                    <a href="images/structure-utc-view.png">
+                        <img src="images/structure-utc-view.png" height="500px" >
+                    </a>
+                </p>
+            </section>
+
+            <section id="slide18" class="step slide">
+                <header class="page-header text-center">
+                    <h2>View</h2>
+                </header>
+                
+                <ul>
+                    <li>defines pair template-controller and exposes it for state</li>
+                    <li>can define its own components</li>
+                    <li>depends on its ancestors</li>
+                    <li>it's a leaf of the app tree – it hasn't children</li>
+                </ul>
+            </section>
+
+            <section id="slide19" class="step slide">
+                <header class="page-header text-center">
+                    <h2>View – project__list__content</h2>
+                </header>
+                
+                <pre class="code-listing">
+                    <code class="language-javascript">
+    define([
+        'angular',
+
+        'text!./project__list__content.view.template.html',
+
+        './directives/project__list__content.directives.module',
+        './services/project__list__content.services.module'
+    ], function (
+        angular,
+
+        TProjectListContent,
+
+        MProjectListContentDirectives,
+        MProjectListContentServices
+        ) {
+
+        angular.module('ts.project__list__content.view', [
+            MProjectListContentDirectives.name,
+            MProjectListContentServices.name
+        ])
+        .constant('VProjectListContent', {
+            template: TProjectListContent,
+            controller: 'ts.project__list__content'
+        });
+
+    });
+                    </code>
+                </pre>
+            </section>
+
+            <section id="slide20" class="step slide">
+                <header class="page-header text-center">
+                    <h2>View – component</h2>
+                </header>
+                
+                <ul>
+                    <li>can use components defined by all its ancestors (view, state, grand-state etc.)</li>
+                    <li>controllers manages single template</li>
+                    <li>services, filters and directives can use one another</li>
+                    <li>any app part <strong>outside the view</strong> can't (or rather mustn't) use component defined by the view</li>
+                </ul>
+            </section>
+
+            <section id="slide21" class="step slide">
+                <header class="page-header text-center">
+                    <h2>View controller – project__list__content</h2>
+                </header>
+                
+                <pre class="code-listing">
+                    <code class="language-javascript">
+    define([
+        './project__list__content.view.module'
+    ], function (MProjectListContent) {
+
+        MProjectListContent.controller('ts.project__list__content',
+            function ($scope, MProjects) {
+                $scope.projects = MProjects;
+            });
+
+    });
+                    </code>
+                </pre>
+            </section>
+
+            <section id="slide22" class="step slide">
+                <header class="page-header text-center">
+                    <h2>Shared components</h2>
+                </header>
+                
+                <ul>
+                    <li>can use components defined by all its ancestors (view, state, grand-state etc.)</li>
+                    <li>no controllers!</li>
+                    <li>services, filters and directives can use one another and can be used by children's components</li>
+                    <li>any app part <strong>above the state</strong> can't (or rather mustn't) use component defined by the view</li>
+                </ul>
+            </section>
+
+            <section id="slide23" class="step slide">
+                <header class="page-header text-center">
+                    <h2>Naming conventions</h2>
+                </header>
+                
+                <p>For files</p>
+                <ul>
+                    <li>*.module.js, *.directive.js, *.service.js</li>
+                    <li>*.state.module.js, *.view.controller.js</li>
+                    <li><a href="http://bem.info/">BEM</a> – project__list.*, recording__one__content.*</li>
+                </ul>
+                <p>For app components and variables</p>
+                <ul>
+                    <li>app.project__list.state, app.project__list__content.view</li>
+                    <li><a href="http://en.wikipedia.org/wiki/Hungarian_notation">Hungarian Notation</a> – MProjectListContent, VProjectListContent</li>
+                </ul>
+            </section>
+
+            <section id="slide24" class="step slide">
+                <header class="page-header text-center">
+                    <h2>Build process</h2>
+                </header>
+                
+                <ul>
+                    <li>configuration of single task in separate file (see <a href="https://www.npmjs.org/package/load-grunt-configs">load-grunt-configs</a>)</li>
+                    <li>meaningless tasks are grouped (ex. <a href="https://www.npmjs.org/package/grunt-nestedtasksrunner">grunt-nestedtasksrunner</a>)</li>
+                    <li>dist configs are a base for dev ones</li>
+                </ul>
+            </section>
+
+            <section id="slide25" class="step slide">
+                <p class="big center">
+                    <strong>Benefits</strong>
+                </p>
+            </section>
+
+            <section id="slide26" class="step slide">
+                <header class="page-header text-center">
+                    <h2>Damn easy feature toggle!</h2>
+                </header>
+                
+                <p class="text-center">
+                    <a href="images/structure-utc-feature-toggle.png">
+                        <img src="images/structure-utc-feature-toggle.png" height="500px" >
+                    </a>
+                </p>
+            </section>
+
+            <section id="slide27" class="step slide">
+                <header class="page-header text-center">
+                    <h2>Damn fast finding files!</h2>
+                </header>
+                
+                <p class="text-center">
+                    <a href="images/structure-utc-finding-files.png">
+                        <img src="images/structure-utc-finding-files.png" height="500px" >
+                    </a>
+                </p>
+            </section>
+
+            <section id="slide28" class="step slide">
+                <header class="page-header text-center">
+                    <h2>All is all right</h2>
+                </header>
+                
+                <ul>
+                    <li>easy to determine which components are required for particular feature</li>
+                    <li>clear connections between components</li>
+                    <li>communication through the nearest common ancestor (except exceptions...)</li>
+                    <li>able to further scaling up</li>
+                </ul>
+            </section>
+
+            <section id="slide29" class="step slide">
+                <header class="page-header text-center">
+                    <h2>Pitfails or trade offs?</h2>
+                </header>
+                
+                <p class="big center">
+                    <strong>Tell me!</strong>
+                </p>
+            </section>
+
+            <section id="slide30" class="step slide">
+                <header class="page-header text-center">
+                    <h2>If you like it – try it (and contribute)</h2>
+                </header>
+
+                <p class="center">
+                    <a href="https://github.com/UsabilityTools/angular-require-seed">angular-require-seed</a>
+                </p>
+            </section>
+
+            <section id="slide31" class="step slide">
+                
+                <p class="big center">
+                    <strong>Thank you!</strong><br>
+                    <small style="font-size: 50%;">
+                        <a href="https://github.com/erykpiast" rel="author">Eryk Napierała</a>@<a href="https://github.com/UsabilityTools">UsabilityTools.com</a>
+                    </small>
+                </p>
+            </section>
+
+        </div>
+
+        <aside class="content-index panel panel-default">
+            <header class="page-header panel-header">
+                <h2>Table of contents</h2>
+            </header>
+
+            <button type="button" class="btn btn-default content-index-trigger">
+                <i class="glyphicon glyphicon-th"></i>
+            </button>
+            <nav class="panel-body content-index-list"></nav>
+        </aside>
+
+        <script src="//cdnjs.cloudflare.com/ajax/libs/prism/0.0.1/prism.min.js"></script>
+        <script>
+            var contentIndex = [ ];
+
+            Array.prototype.forEach.call(document.querySelectorAll('[id^="slide"]'), function(slide, index) {
+                slide.setAttribute('data-y', '-1500');
+                slide.setAttribute('data-x', -1500 + (index * 1500));
+
+                var header = slide.querySelector('.page-header > h2');
+
+                if(header) {
+                    contentIndex.push({
+                        title: header.innerHTML,
+                        id: slide.getAttribute('id')
+                    });
+                }
+            });
+
+            document.querySelector('.content-index-list').innerHTML = (contentIndex.reduce(function(prev, curr) {
+                return (prev + '<li class="content-index-list-item"><a href="#' + curr.id + '">' + curr.title + '</a></li>');
+            }, '<ul class="nav nav-pills nav-stacked content-index-list">') + '</ul>');
+        </script>
+        <script src="js/impress.js"></script>
+        <script>impress().init();</script>
+        <script>
+        /*
+				 T he M*IT License (MIT)
+				 
+				 Copyright (c) 2014 Chris Wilson
+				 
+				 Permission is hereby granted, free of charge, to any person obtaining a copy
+				 of this software and associated documentation files (the "Software"), to deal
+				 in the Software without restriction, including without limitation the rights
+				 to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+				 copies of the Software, and to permit persons to whom the Software is
+				 furnished to do so, subject to the following conditions:
+				 
+				 The above copyright notice and this permission notice shall be included in all
+				 copies or substantial portions of the Software.
+				 
+				 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+				 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+				 FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+				 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+				 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+				 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+				 SOFTWARE.
+				 */
+				(function() {
+					
+					var audioContext = null;
+					var meter = null;
+					var canvasContext = null;
+					var WIDTH=500;
+					var HEIGHT=50;
+					var rafID = null;
+					
+					
+					/*
+					 * 
+					 * Usage:
+					 * audioNode = createAudioMeter(audioContext,clipLevel,averaging,clipLag);
+					 * 
+					 * audioContext: the AudioContext you're using.
+					 * clipLevel: the level (0 to 1) that you would consider "clipping".
+					 *   Defaults to 0.98.
+					 * averaging: how "smoothed" you would like the meter to be over time.
+					 *   Should be between 0 and less than 1.  Defaults to 0.95.
+					 * clipLag: how long you would like the "clipping" indicator to show
+					 *   after clipping has occured, in milliseconds.  Defaults to 750ms.
+					 * 
+					 * Access the clipping through node.checkClipping(); use node.shutdown to get rid of it.
+					 */
+					
+					function createAudioMeter(audioContext,clipLevel,averaging,clipLag) {
+						var processor = audioContext.createScriptProcessor(512);
+						processor.onaudioprocess = volumeAudioProcess;
+						processor.clipping = false;
+						processor.lastClip = 0;
+						processor.volume = 0;
+						processor.clipLevel = clipLevel || 0.98;
+						processor.averaging = averaging || 0.95;
+						processor.clipLag = clipLag || 250;
+						
+						// this will have no effect, since we don't copy the input to the output,
+						// but works around a current Chrome bug.
+						processor.connect(audioContext.destination);
+						
+						processor.checkClipping =
+						function(){
+							if (!this.clipping)
+								return false;
+							if ((this.lastClip + this.clipLag) < window.performance.now())
+								this.clipping = false;
+							
+							return this.clipping;
+						};
+						
+						processor.shutdown =
+						function(){
+							this.disconnect();
+							this.onaudioprocess = null;
+						};
+						
+						return processor;
+					}
+					
+					function volumeAudioProcess( event ) {
+						var buf = event.inputBuffer.getChannelData(0);
+						var bufLength = buf.length;
+						var sum = 0;
+						var x;
+						
+						// Do a root-mean-square on the samples: sum up the squares...
+						for (var i=0; i<bufLength; i++) {
+							x = buf[i];
+							if (Math.abs(x)>=this.clipLevel) {
+								this.clipping = true;
+								this.lastClip = window.performance.now();
+							}
+							sum += x * x;
+						}
+						
+						// ... then take the square root of the sum.
+						var rms =  Math.sqrt(sum / bufLength);
+						
+						// Now smooth this out with the averaging factor applied
+						// to the previous sample - take the max here because we
+						// want "fast attack, slow release."
+						this.volume = Math.max(rms, this.volume*this.averaging);
+					}
+					
+					window.onload = function() {
+						
+						// grab our canvas
+						//canvasContext = document.getElementById( "meter" ).getContext("2d");
+						
+						// monkeypatch Web Audio
+						window.AudioContext = window.AudioContext || window.webkitAudioContext;
+						
+						// grab an audio context
+						audioContext = new AudioContext();
+						
+						// Attempt to get audio input
+						try {
+							// monkeypatch getUserMedia
+							navigator.getUserMedia = 
+							navigator.getUserMedia ||
+							navigator.webkitGetUserMedia ||
+							navigator.mozGetUserMedia;
+							
+							// ask for an audio input
+							navigator.getUserMedia(
+								{
+									"audio": {
+										"mandatory": {
+											"googEchoCancellation": "false",
+											"googAutoGainControl": "false",
+											"googNoiseSuppression": "false",
+											"googHighpassFilter": "false"
+										},
+										"optional": []
+									},
+								}, gotStream, didntGetStream);
+						} catch (e) {
+							alert('getUserMedia threw exception :' + e);
+						}
+						
+					}
+					
+					
+					function didntGetStream() {
+						alert('Stream generation failed.');
+					}
+					
+					var mediaStreamSource = null;
+					
+					function gotStream(stream) {
+						// Create an AudioNode from the stream.
+						mediaStreamSource = audioContext.createMediaStreamSource(stream);
+						
+						// Create a new volume meter and connect it.
+						meter = createAudioMeter(audioContext);
+						mediaStreamSource.connect(meter);
+						
+						// kick off the visual updating
+						drawLoop();
+					}
+					
+					var lastNotClip = 0;
+					
+					function nextSlideChecker(clip) {
+						console.log(clip);
+						if (!clip) lastNotClip = window.performance.now();
+				 if (clip) {
+					 if ((lastNotClip != 0) && (lastNotClip + 1000 < window.performance.now())) {
+						 lastNotClip = 0;
+						 impress().next();
+					 }
+				 }
+					}
+					
+					function drawLoop( time ) {
+						// clear the background
+						//canvasContext.clearRect(0,0,WIDTH,HEIGHT);
+						
+						// check if we're currently clipping
+						if (meter.checkClipping()) {
+							//canvasContext.fillStyle = "red";
+							nextSlideChecker(true);
+						} else {
+							//canvasContext.fillStyle = "green";
+							nextSlideChecker(false);
+						}
+						
+						// draw a bar based on the current volume
+						//canvasContext.fillRect(0, 0, meter.volume*WIDTH*1.4, HEIGHT);
+						
+						// set up the next visual callback
+						rafID = window.requestAnimationFrame( drawLoop );
+					}
+					
+				})();
+        </script>
+    </body>
+</html>
