@@ -49,11 +49,14 @@ var RandomKitteh = React.createClass({
 		));
 	}
 });
-window.addEventListener('hashchange', function() {
-  if (window.location.hash === "#/slide-kitteh") {
-		React.render(
-			<RandomKitteh />,
-			document.getElementById('a-place-for-random-kitteh')
-		);
+
+var doTheKitteh = function() {
+if (window.location.hash === "#/slide-kitteh") {
+	React.render(
+		<RandomKitteh />,
+		document.getElementById('a-place-for-random-kitteh')
+	);
 	}
-});
+};
+doTheKitteh();
+window.addEventListener('hashchange', doTheKitteh);
