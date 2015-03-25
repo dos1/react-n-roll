@@ -106,7 +106,6 @@
 										<li>composable</li>
 										<li>reusable</li>
 										<li>maintainable</li>
-										<li>testable</li>
 										</ul>
                 </p>
             </section>
@@ -152,7 +151,7 @@ React.render(
 
             <section id="slide8.5" class="step slide subslide">
             <header class="page-header text-center">
-            <h2>JSX</h2>
+            <h3>JSX</h3>
             </header>
             <pre class="code-listing" style="padding-top: 0; padding-bottom: 0;">
             <code class="language-javascript language-jsx" style="padding: 0">render: function() {
@@ -185,16 +184,6 @@ React.render(
                     <h2>Components</h2>
                 </header>
 
-                <p class="big center">
-									Data is <strong>immutable</strong>!
-                </p>
-            </section>            
-            
-            <section id="slide10.1" class="step slide subslide">
-                <header class="page-header text-center">
-                    <h2>Components</h2>
-                </header>
-
                 <pre class="code-listing">
                 <code class="language-javascript">var GlowinKitteh = React.createClass({
 	render: function() {
@@ -210,14 +199,196 @@ React.render(
 </pre>
             </section>
 
-            <section id="slide10.2" class="step slide subslide">
+            <section id="slide10.1" class="step slide subslide">
                 <p class="big center" id="a-place-for-glowin-kitteh">
                 </p>
             </section>
+
+            <section id="slide10.2" class="step slide subslide">
+            
+            <pre class="code-listing" style="padding-top: 0; padding-bottom: 0">
+            <code class="language-javascript">var RandomKitteh = React.createClass({
+
+	componentDidMount: function() {
+		var parseJson = function (response) {
+			return response.json();
+		};
+		
+		window.fetch("kitty.php").then(parseJson)
+			.then((function (response) {
+				if (this.isMounted()) {
+					this.setState(response);
+				}
+			}).bind(this));
+	},
+	
+	(...)</code>
+						</pre>            
+						</section>
+            
+
+            <section id="slide10.3" class="step slide xtraslide">
+            
+            <pre class="code-listing" style="padding-top: 0; padding-bottom: 0">
+            <code class="language-javascript">
+	(...)
+	
+	render: function() {
+		return (this.state ? (
+			&lt;div&gt;
+				&lt;img src={ this.state.url } /&gt;
+				&lt;p className="link">
+					&lt;a target="_blank"
+						href={ this.state.source }>
+							{ this.state.source }
+					&lt;/a>
+				&lt;/p&gt;
+			&lt;/div&gt;
+		) : (
+			&lt;p>Loading kitteh...&lt;/p&gt;
+		));
+	}
+});</code>
+						</pre>            
+						</section>            
             
             
+            <section id="slide-kitteh" class="step slide subslide">
+							<p class="big center" id="a-place-for-random-kitteh">
+							</p>
+            </section>
             
-            <section id="slide11" class="step slide">
+            
+            <section id="slide10.4" class="step slide subslide">
+            
+            <pre class="code-listing" style="padding-top: 0; padding-bottom: 0">
+            <code class="language-javascript">var OneKitteh = React.createClass({
+	handleClick: function() {
+		var colors = ['magenta', 'yellow', 'lightgreen', 'blue', 'red', 'black'];
+		var color = colors[Math.floor(Math.random() * colors.length)];
+		this.setState({color: color });
+	},
+
+	render: function() {
+		return (
+			<div>
+				<img src={ this.props.data.url } style={{ boxShadow: "0px 0px 100px " + (this.state ? this.state.color : "transparent") }} onClick={ this.handleClick } />
+				<p className="link"><a target="_blank" href={ this.props.data.source }>{ this.props.data.source }</a></p>
+			</div>
+		);
+	}
+});</code>
+						</pre>            
+						</section>
+						
+						
+            <section id="slide10.5" class="step slide xtraslide">
+            
+            <pre class="code-listing" style="padding-top: 0; padding-bottom: 0">
+            <code class="language-javascript" style="font-size: 0.8em">var InteractiveKittehs = React.createClass({
+	componentDidMount: function() {
+		this.setState({kittehs: []});
+		this.addKitteh();
+	},
+	
+	render: function() {
+		var link = (this.state &amp;&amp; this.state.loading) ? "Loading" : (&lt;span className="link"&gt;&lt;a onClick={ this.addKitteh }&gt;Moar kittehs!!!11one&lt;/a&gt; | &lt;a onClick={ this.clearKittehs }>Clear&lt;/a&gt;&lt;/span&gt;);
+	
+		return (this.state ? (
+			&lt;div&gt;
+				&lt;div className="kittehs-box"&gt;
+					{ this.state.kittehs }
+				&lt;/div&gt;
+				{ link }
+			&lt;/div&gt;
+		) : (
+			&lt;p&gt;Loading kitteh...&lt;/p&gt;
+		));
+	}
+	
+	clearKittehs: function() {
+		this.setState({ kittehs: [] });
+	},
+	(...)</code>
+						</pre>            
+						</section>
+            
+            
+            <section id="slide10.6" class="step slide xtraslide">
+            
+            <pre class="code-listing" style="padding-top: 0; padding-bottom: 0">
+            <code class="language-javascript" style="font-size: 0.8em">(...)
+
+	addKitteh: function() {
+
+		var parseJson = function (response) {
+			return response.json();
+		};
+		
+		this.setState({loading: true});
+		
+		window.fetch("kitty.php").then(parseJson)
+			.then((function (response) {
+				if (this.isMounted()) {
+					this.setState(
+						{
+			loading: false,
+			kittehs: this.state.kittehs.concat(
+	[ &lt;OneKitteh key={this.state.kittehs.length} data={response} /&gt; ]
+			)
+						}
+					);
+				}
+				return false;
+			}).bind(this));
+	},
+
+});</code>
+						</pre>            
+						</section>            
+            
+            <section id="slide-kittehs" class="step slide subslide">
+							<p class="big center" id="a-place-for-kittehs">
+							</p>
+            </section>
+            
+            <section id="slide11.0" class="step slide">
+							<header class="page-header text-center"><h2>Performance</h2></header>
+							
+							<p class="big center">What makes it so fast?</p>
+            </section>
+            
+            <section id="slide12.1" class="step slide subslide">
+            <header class="page-header text-center"><h2>Performance</h2></header>
+            
+            <p class="big center">Re-render each time some data changes.</p>
+            
+            </section>
+            
+            <section id="slide13.2" class="step slide subslide">
+            <header class="page-header text-center"><h2>Performance</h2></header>
+            
+            <p class="big center">Virtual DOM and diffing</p>
+            
+            </section>
+            
+            <section id="slide13.3" class="step slide subslide">
+            <header class="page-header text-center"><h2>Performance</h2></header>
+            
+            <ul><li>shouldComponentUpdate()</li><li>helpers for dealing with immutability
+            
+                        <pre class="code-listing" style="padding-top: 0; padding-bottom: 0">
+            <code class="language-javascript">var newData = React.addons.update(myData, {
+  x: {y: {z: {$set: 7}}},
+  a: {b: {$push: [9]}}
+});</code>
+						</pre> 
+            </li></ul>
+            </section>
+            
+            <!--
+            
+            <section id="slide111" class="step slide">
                 <header class="page-header text-center">
                     <h2>co dalej</h2>
                 </header>
@@ -234,7 +405,7 @@ React.render(
                 </ul>
             </section>
             
-            <section id="slide11.5" class="step slide">
+            <section id="slide1111" class="step slide">
             
             <div id="detector" class="vague">
             <div class="pitch"><span id="pitch">--</span>Hz</div>
@@ -245,415 +416,22 @@ React.render(
             
             </section>
             
-            <section id="slide-kitteh" class="step slide subslide">
-            <p class="big center" id="a-place-for-random-kitteh">
-            </p>
-            </section>
-
-            <section id="slide12" class="step slide">
-                <header class="page-header text-center">
-                    <h2>State – root</h2>
-                </header>
-
-                <pre class="code-listing">
-                    <code class="language-javascript">
-    define([
-        'angular',
-
-        'common/helpers/features/features',
-
-        './sub/project/project.state.module',
-        './sub/user/user.state.module',
-
-        './views/header/root__header.view.module',
-        './views/footer/root__footer.view.module',
-        './views/sidebar/root__sidebar.view.module',
-        './views/content/root__content.view.module',
-
-        'ui.router',
-        'restangular'
-    ], function (
-        angular,
-
-        features,
-
-        MProjectState,
-        MUserState,
-
-        MRootFooterView,
-        MRootHeaderView,
-        MRootSidebarView,
-        MRootContentView
-        ) {
-
-        angular.module('app.root.state', features.toggle([
-            (features.active('project') && MProjectState.name),
-            (features.active('user') && MUserState.name),
-
-            MRootHeaderView.name,
-            MRootFooterView.name,
-            MRootSidebarView.name,
-            MRootContentView.name,
-
-            'ui.router',
-            'restangular'
-        ]))
-        .config(function (
-            $stateProvider,
-
-            VRootHeader,
-            VRootFooter,
-            VRootSidebar,
-            VRootContent
-        ) {
-
-            $stateProvider
-                .state('root', {
-                    url: '/',
-                    views: {
-                        'header@': VRootHeader,
-                        'footer@': VRootFooter,
-                        'sidebar@': VRootSidebar,
-                        'content@': VRootContent
-                    }
-                });
-        });
-    });
-                    </code>
-                </pre>
-            </section>
-
-            <section id="slide13" class="step slide subslide">
-                <header class="page-header text-center">
-                    <h2>State – root.project</h2>
-                </header>
-
-                <pre class="code-listing">
-                    <code class="language-javascript">
-    angular.module('app.project.state', features.toggle([
-        (features.active('project.list') && MProjectListState.name),
-        (features.active('project.add') && MProjectAddState.name),
-        (features.active('project.one') && MProjectOneState.name),
-
-        'ui.router'
-    ]))
-    .config(function (
-        $stateProvider
-    ) {
-        $stateProvider
-            .state('root.authenticated.project', {
-                url: '/project',
-                abstract: true,
-                resolve: {
-                    RProject: function() {
-                        return MProjects.service('project');
-                    }
-                }
-            });
-    });
-                    </code>
-                </pre>
-            </section>
-
-            <section id="slide14" class="step slide subslide">
-                <header class="page-header text-center">
-                    <h2>State – root.project.one</h2>
-                </header>
-
-                <pre class="code-listing">
-                    <code class="language-javascript">
-    var stateName = 'root.project.one';
-
-    angular.module('app.project__one.state', features.toggle([
-        (features.active('project.one.recording') && MProjectOneRecordingState.name),
-        (features.active('project.one.script') && MProjectOneScriptState.name),
-        (features.active('project.one.edit') && MProjectOneEditState.name),
-
-        MProjectHeaderView.name,
-
-        'ui.router',
-        'restangular'
-    ]))
-    .config(function (
-        $stateProvider,
-        RestangularProvider,
-
-        VProjectOneHeader
-    ) {
-        $stateProvider
-            .state(stateName, {
-                url: '/{projectId:[0-9a-z]{4,}}',
-                abstract: true,
-                views: {
-                    'header@': VProjectOneHeader
-                },
-                resolve: {
-                    MProject: function(MProjects, $stateParams) {
-                        return MProjects.get($stateParams.projectId);
-                    }
-                },
-                onEnter: function(MProjects, $stateParams) {
-                    MProjects.current = MProjects.filter(function(project) {
-                        return (project.id === $stateParams.projectId);
-                    })[0];
-                },
-                onExit: function(MProjects) {
-                    MProjects.current = null;
-                }
-            });
-    })
-    .run(function(
-        $rootScope,
-        $state
-    ) {
-        $rootScope
-            .$on('$stateChangeError', function(e, toState) {
-                if(!e.defaultPrevented && (toState.name.indexOf(stateName) === 0)) {
-                    e.preventDefault();
-
-                    $state.go('^.list', { }, {
-                        location: 'replace',
-                        relative: stateName
-                    });
-                }
-            });
-    });
-                    </code>
-                </pre>
-            </section>
-
-            <section id="slide15" class="step slide">
-                <header class="page-header text-center">
-                    <h2>View</h2>
-                </header>
-
-                <p class="text-center">
-                    <a href="images/wireframe-simple.png">
-                        <img src="images/wireframe-simple.png" height="500px" >
-                    </a>
-                </p>
-            </section>
-
-            <section id="slide16" class="step slide subslide">
-                <header class="page-header text-center">
-                    <h2>View</h2>
-                </header>
-
-                <p class="text-center">
-                    <a href="images/wireframe-complicated.png">
-                        <img src="images/wireframe-complicated.png" height="500px" >
-                    </a>
-                </p>
-            </section>
-
-            <section id="slide17" class="step slide subslide">
-                <header class="page-header text-center">
-                    <h2>View</h2>
-                </header>
-
-                <p class="text-center">
-                    <a href="images/structure-utc-view.png">
-                        <img src="images/structure-utc-view.png" height="500px" >
-                    </a>
-                </p>
-            </section>
-
-            <section id="slide18" class="step slide subslide">
-                <header class="page-header text-center">
-                    <h2>View</h2>
-                </header>
-
-                <ul>
-                    <li>defines pair template-controller and exposes it for state</li>
-                    <li>can define its own components</li>
-                    <li>depends on its ancestors</li>
-                    <li>it's a leaf of the app tree – it hasn't children</li>
-                </ul>
-            </section>
-
-            <section id="slide19" class="step slide subslide">
-                <header class="page-header text-center">
-                    <h2>View – project__list__content</h2>
-                </header>
-
-                <pre class="code-listing">
-                    <code class="language-javascript">
-    define([
-        'angular',
-
-        'text!./project__list__content.view.template.html',
-
-        './directives/project__list__content.directives.module',
-        './services/project__list__content.services.module'
-    ], function (
-        angular,
-
-        TProjectListContent,
-
-        MProjectListContentDirectives,
-        MProjectListContentServices
-        ) {
-
-        angular.module('ts.project__list__content.view', [
-            MProjectListContentDirectives.name,
-            MProjectListContentServices.name
-        ])
-        .constant('VProjectListContent', {
-            template: TProjectListContent,
-            controller: 'ts.project__list__content'
-        });
-
-    });
-                    </code>
-                </pre>
-            </section>
-
-            <section id="slide20" class="step slide subslide">
-                <header class="page-header text-center">
-                    <h2>View – component</h2>
-                </header>
-
-                <ul>
-                    <li>can use components defined by all its ancestors (view, state, grand-state etc.)</li>
-                    <li>controllers manages single template</li>
-                    <li>services, filters and directives can use one another</li>
-                    <li>any app part <strong>outside the view</strong> can't (or rather mustn't) use component defined by the view</li>
-                </ul>
-            </section>
-
-            <section id="slide21" class="step slide subslide">
-                <header class="page-header text-center">
-                    <h2>View controller – project__list__content</h2>
-                </header>
-
-                <pre class="code-listing">
-                    <code class="language-javascript">
-    define([
-        './project__list__content.view.module'
-    ], function (MProjectListContent) {
-
-        MProjectListContent.controller('ts.project__list__content',
-            function ($scope, MProjects) {
-                $scope.projects = MProjects;
-            });
-
-    });
-                    </code>
-                </pre>
-            </section>
-
-            <section id="slide22" class="step slide">
-                <header class="page-header text-center">
-                    <h2>Shared components</h2>
-                </header>
-
-                <ul>
-                    <li>can use components defined by all its ancestors (view, state, grand-state etc.)</li>
-                    <li>no controllers!</li>
-                    <li>services, filters and directives can use one another and can be used by children's components</li>
-                    <li>any app part <strong>above the state</strong> can't (or rather mustn't) use component defined by the view</li>
-                </ul>
-            </section>
-
-            <section id="slide23" class="step slide">
-                <header class="page-header text-center">
-                    <h2>Naming conventions</h2>
-                </header>
-
-                <p>For files</p>
-                <ul>
-                    <li>*.module.js, *.directive.js, *.service.js</li>
-                    <li>*.state.module.js, *.view.controller.js</li>
-                    <li><a href="http://bem.info/">BEM</a> – project__list.*, recording__one__content.*</li>
-                </ul>
-                <p>For app components and variables</p>
-                <ul>
-                    <li>app.project__list.state, app.project__list__content.view</li>
-                    <li><a href="http://en.wikipedia.org/wiki/Hungarian_notation">Hungarian Notation</a> – MProjectListContent, VProjectListContent</li>
-                </ul>
-            </section>
-
-            <section id="slide24" class="step slide">
-                <header class="page-header text-center">
-                    <h2>Build process</h2>
-                </header>
-
-                <ul>
-                    <li>configuration of single task in separate file (see <a href="https://www.npmjs.org/package/load-grunt-configs">load-grunt-configs</a>)</li>
-                    <li>meaningless tasks are grouped (ex. <a href="https://www.npmjs.org/package/grunt-nestedtasksrunner">grunt-nestedtasksrunner</a>)</li>
-                    <li>dist configs are a base for dev ones</li>
-                </ul>
-            </section>
-
-            <section id="slide25" class="step slide">
-                <p class="big center">
-                    <strong>Benefits</strong>
-                </p>
-            </section>
-
-            <section id="slide26" class="step slide subslide">
-                <header class="page-header text-center">
-                    <h2>Damn easy feature toggle!</h2>
-                </header>
-
-                <p class="text-center">
-                    <a href="images/structure-utc-feature-toggle.png">
-                        <img src="images/structure-utc-feature-toggle.png" height="500px" >
-                    </a>
-                </p>
-            </section>
-
-            <section id="slide27" class="step slide subslide">
-                <header class="page-header text-center">
-                    <h2>Damn fast finding files!</h2>
-                </header>
-
-                <p class="text-center">
-                    <a href="images/structure-utc-finding-files.png">
-                        <img src="images/structure-utc-finding-files.png" height="500px" >
-                    </a>
-                </p>
-            </section>
-
-            <section id="slide28" class="step slide subslide">
-                <header class="page-header text-center">
-                    <h2>All is all right</h2>
-                </header>
-
-                <ul>
-                    <li>easy to determine which components are required for particular feature</li>
-                    <li>clear connections between components</li>
-                    <li>communication through the nearest common ancestor (except exceptions...)</li>
-                    <li>able to further scaling up</li>
-                </ul>
-            </section>
-
-            <section id="slide29" class="step slide">
-                <header class="page-header text-center">
-                    <h2>Pitfails or trade offs?</h2>
-                </header>
-
-                <p class="big center">
-                    <strong>Tell me!</strong>
-                </p>
-            </section>
-
+            -->
             <section id="slide30" class="step slide">
                 <header class="page-header text-center">
-                    <h2>If you like it – try it (and contribute)</h2>
+                    <h2>Dev tools</h2>
                 </header>
 
-                <p class="center">
-                    <a href="https://github.com/UsabilityTools/angular-require-seed">angular-require-seed</a>
-                </p>
+                <p class="big center"><img src="http://dosowisko.net/react.png" /></p>
             </section>
-
+            
+            
             <section id="slide31" class="step slide">
 
                 <p class="big center">
                     <strong>Thank you!</strong><br>
                     <small style="font-size: 50%;">
-                        <a href="https://github.com/erykpiast" rel="author">Eryk Napierała</a>@<a href="https://github.com/UsabilityTools">UsabilityTools.com</a>
+                        <a href="http://dosowisko.net/" rel="author">Sebastian Krzyszkowiak</a>@<a href="https://github.com/UsabilityTools">UsabilityTools.com</a>
                     </small>
                 </p>
             </section>
@@ -675,19 +453,24 @@ React.render(
         <script>
             var contentIndex = [ ];
 
-            var subSlideIdx = 0, subSlideCount = 0, lastHeader;
+            var subSlideIdx = 0, subSlideCount = 0, xtraSlideCount = 0, xtraSlideIdx = 0, lastHeader;
 
             Array.prototype.forEach.call(document.querySelectorAll('[id^="slide"]'), function(slide, index) {
                 if (slide.classList.contains('subslide')) {
 									subSlideIdx++;
 									subSlideCount++;
-                } else {
+									xtraSlideIdx = 0;
+								} else if (slide.classList.contains('xtraslide')) {
+									xtraSlideCount++;
+									xtraSlideIdx++;
+								} else {
 									subSlideIdx = 0;
+									xtraSlideIdx = 0;
                 }
 
-                slide.setAttribute('data-y', - ((index - subSlideCount) * 600));
-                slide.setAttribute('data-x', (index * 1000) + (subSlideCount * 150));
-                slide.setAttribute('data-z', ((index - subSlideCount) * 1500));
+                slide.setAttribute('data-y', - ((index - subSlideCount - xtraSlideCount) * 600) + (xtraSlideIdx * 750));
+                slide.setAttribute('data-x', ((index - xtraSlideCount) * 1000) + (subSlideCount * 150));
+                slide.setAttribute('data-z', ((index - xtraSlideCount - subSlideCount) * 1500));
 
                 var header = slide.querySelector('.page-header > h2');
 
@@ -861,7 +644,7 @@ React.render(
 					var mediaStreamSource = null;
 
 					function gotStream(stream) {
-						startPitch();
+						//startPitch();
 						
 						// Create an AudioNode from the stream.
 						mediaStreamSource = audioContext.createMediaStreamSource(stream);

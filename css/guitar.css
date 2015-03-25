@@ -43,6 +43,10 @@ div.vague { color: lightgrey; }
 .flat #flat { display: inline; }
 .sharp #sharp { display: inline; }
 
-p.link {
+.link {
 	font-size: 0.5em;
+}
+
+.kittehs-box {
+	display: flex;
 }
