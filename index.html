@@ -16,7 +16,8 @@
 
         <link href="css/base.css" rel="stylesheet" />
         <link href="css/utc.css" rel="stylesheet" />
-
+        <link href="css/guitar.css" rel="stylesheet" />
+        
 
         <script src="https://fb.me/react-0.13.1.js"></script>
         <script src="https://fb.me/JSXTransformer-0.13.1.js"></script>
@@ -52,122 +53,198 @@
 
             <section id="slide2" class="step slide">
                 <header class="page-header text-center">
-                    <h2>Framework is just a tool</h2>
+                    <h2>What is React? *</h2>
                 </header>
 
                 <p>
-                    And as every another tool, you can use it well or wrong.
+                A JavaScript library for building user interfaces.
                 </p>
-                <p class="text-center">
-                    <strong>Angular isn't an exception.</strong>
-                </p>
+
+                
+                <footer class="page-footer text-right bottom">
+									<small>
+										* Facebook don't hurt me
+									</small>
+                </footer>
             </section>
 
             <section id="slide3" class="step slide subslide">
-                <p class="big text-center" style="margin-top: 20%">
-                    How to use Angular well?
-                </p>
-                <p class="big text-center">
-                    How to build a webapp, that you can develop fast and painless <strong>even after prototyping phase</strong>?
+								<header class="page-header text-center">
+									<h2>Why it's so special?</h2>
+								</header>
+
+                <p>
+                    <ul>
+											<li>it's fast</li>
+											<li>it's simple</li>
+											<li>it's flexible</li>
+										</ul>
                 </p>
             </section>
 
             <section id="slide4" class="step slide subslide">
                 <p class="big center">
-                    <strong>Let's start planning!</strong>
+										It's not a framework!<br/><br/>
+										<small>It's a library.</small>
                 </p>
             </section>
 
-            <section id="slide5" class="step slide">
+            <section id="slide4.5" class="step slide">
+                <p class="big center">
+									<strong>Components</strong>
+                </p>
+            </section>
+            
+            <section id="slide5" class="step slide subslide">
                 <header class="page-header text-center">
-                    <h2>Seed hunting</h2>
+                    <h2>Components</h2>
                 </header>
 
                 <p class="text-center">
-                    <a href="https://github.com/search?q=angular+seed&ref=cmdform">
-                        <img src="images/github-angular-seed_01.png" width="100%" >
-                    </a>
+									<ul>
+										<li>composable</li>
+										<li>reusable</li>
+										<li>maintainable</li>
+										<li>testable</li>
+										</ul>
                 </p>
             </section>
 
             <section id="slide6" class="step slide subslide">
                 <header class="page-header text-center">
-                    <h2>Seed hunting – common structure</h2>
+                    <h2>Components</h2>
                 </header>
 
-                <p class="text-center">
-                    <a href="images/structure-common.png">
-                        <img src="images/structure-common.png" height="100%" >
-                    </a>
-                </p>
+                <pre class="code-listing">
+                <code class="language-javascript">var Kitteh = React.createClass({
+	render: function() {
+		return (
+			&lt;img src="https://aroundustyroads.files.wordpress.com/2014/01/kitten.png" /&gt;
+		);
+	}
+});
+React.render(
+	&lt;Kitteh /&gt;,
+	document.getElementById('a-place-for-kitteh')
+);</code>
+</pre>
             </section>
 
             <section id="slide7" class="step slide subslide">
-                <header class="page-header text-center">
-                    <h2>Seed hunting – common structure</h2>
-                </header>
-
-                <p>Pros</p>
-                <ul>
-                    <li>easy to start and add new features fast</li>
-                </ul>
-                <p>Cons:</p>
-                <ul>
-                    <li>every component can use all others</li>
-                    <li>hard to define components of single feature</li>
-                    <li>potentially messed communication</li>
-                    <li>unclear dependency tree</li>
-                    <li>main module have to manage everything (dependencies, configuration, routes, etc.)</li>
-                </ul>
+                <p class="big center" id="a-place-for-kitteh">
+                    
+                </p>
             </section>
 
-            <section id="slide8" class="step slide">
+            <section id="slide8" class="step slide subslide">
+            <pre class="code-listing" style="padding-top: 0; padding-bottom: 0;">
+            <code class="language-javascript" style="font-size: 0.8em; padding: 0">render: function() {
+	return (
+		&lt;img src="(...)" /&gt;
+	);
+}</code>
+</pre>
+                <p class="text-center" style="margin-top: -50px; position: relative;">
+                    <img src="http://www.quickmeme.com/img/45/4547755c16e559dfddad6f7a725e499f9ac9169e0f2683db0b1f805c48943723.jpg" height="500" />
+                </p>
+            </section>
+
+            <section id="slide8.5" class="step slide subslide">
+            <header class="page-header text-center">
+            <h2>JSX</h2>
+            </header>
+            <pre class="code-listing" style="padding-top: 0; padding-bottom: 0;">
+            <code class="language-javascript language-jsx" style="padding: 0">render: function() {
+	return (
+		&lt;img src="(...)" /&gt;
+	);
+}</code>
+</pre>
+            <pre class="code-listing" style="padding-top: 0; padding-bottom: 0;">
+            <code class="language-javascript" style="padding: 0">render: function() {
+	return (
+		React.createElement('img', { src: "(...)" })
+	);
+}</code>
+</pre>
+            </section>            
+            
+            <section id="slide9" class="step slide subslide">
+                <header class="page-header text-center">
+                    <h2>Components</h2>
+                </header>
+
                 <p class="big center">
-                    <strong>We want to avoid problems that we already perceived</strong><br/>
-                    (and we don't like to be common!)
+									Data flows <strong>one way</strong>!
                 </p>
             </section>
 
-            <section id="slide9" class="step slide">
+            <section id="slide10" class="step slide subslide">
                 <header class="page-header text-center">
-                    <h2>UsabilityTools.com app structure</h2>
+                    <h2>Components</h2>
                 </header>
 
-                <p class="text-center">
-                    <a href="images/structure-utc-overview.png">
-                        <img src="images/structure-utc-overview_m.png" height="500px" >
-                    </a>
+                <p class="big center">
+									Data is <strong>immutable</strong>!
                 </p>
-            </section>
-
-            <section id="slide10" class="step slide">
+            </section>            
+            
+            <section id="slide10.1" class="step slide subslide">
                 <header class="page-header text-center">
-                    <h2>State</h2>
+                    <h2>Components</h2>
                 </header>
 
-                <p class="text-center">
-                    <a href="images/structure-utc-state.png">
-                        <img src="images/structure-utc-state.png" height="500px" >
-                    </a>
-                </p>
+                <pre class="code-listing">
+                <code class="language-javascript">var GlowinKitteh = React.createClass({
+	render: function() {
+		return (
+			&lt;img src="https://aroundustyroads.files.wordpress.com/2014/01/kitten.png" style={{ boxShadow: "0px 0px 100px " + this.props.color }} /&gt;
+		);
+	}
+	});
+React.render(
+	&lt;GlowinKitteh color="magenta" /&gt;,
+	document.getElementById('a-place-for-glowin-kitteh')
+);</code>
+</pre>
             </section>
 
-            <section id="slide11" class="step slide subslide">
+            <section id="slide10.2" class="step slide subslide">
+                <p class="big center" id="a-place-for-glowin-kitteh">
+                </p>
+            </section>
+            
+            
+            
+            <section id="slide11" class="step slide">
                 <header class="page-header text-center">
-                    <h2>State</h2>
+                    <h2>co dalej</h2>
                 </header>
 
                 <ul>
-                    <li>can have views (or be an abstract)</li>
-                    <li>can have substates</li>
-                    <li>can define common components for its views and substates</li>
-                    <li>depends on its ancestors</li>
-                    <li>doesn't depend on its children</li>
-                    <li>manages dependencies, routes and configuration that it needs</li>
+                    <li>stan - losowy kotek</li>
+                    <li>handlery eventów - wylosuj kotka</li>
+                    <li>why it's fast (full rerenders, virtual dom, diff)</li>
+                    <li>componentDidMount, this.getDOMNode()</li>
+                    <li>start making components - struny i nuty</li>
+                    <li>pchanie danych w dół - grana nuta</li>
+                    <li>pchanie danych do góry - wybór stroju</li>
+                    <li>http://www.slideshare.net/AndrewHull/react-js-and-why-its-awesome?related=1</li>
                 </ul>
             </section>
+            
+            <section id="slide11.5" class="step slide">
+            
+            <div id="detector" class="vague">
+            <div class="pitch"><span id="pitch">--</span>Hz</div>
+            <div class="note"><span id="note">--</span></div>   
+            <canvas id="output" width=300 height=42></canvas>
+            <div id="detune"><span id="detune_amt">--</span><span id="flat">cents &#9837;</span><span id="sharp">cents &#9839;</span></div>
+            </div>
+            
+            </section>
 
-            <section id="slide12" class="step slide subslide">
+            <section id="slide12" class="step slide">
                 <header class="page-header text-center">
                     <h2>State – root</h2>
                 </header>
@@ -592,7 +669,7 @@
         <script>
             var contentIndex = [ ];
 
-            var subSlideIdx = 0, subSlideCount = 0;
+            var subSlideIdx = 0, subSlideCount = 0, lastHeader;
 
             Array.prototype.forEach.call(document.querySelectorAll('[id^="slide"]'), function(slide, index) {
                 if (slide.classList.contains('subslide')) {
@@ -604,15 +681,17 @@
 
                 slide.setAttribute('data-y', - ((index - subSlideCount) * 600));
                 slide.setAttribute('data-x', (index * 1000) + (subSlideCount * 150));
-                slide.setAttribute('data-z', -1500 + ((index - subSlideCount) * 1500));
+                slide.setAttribute('data-z', ((index - subSlideCount) * 1500));
 
                 var header = slide.querySelector('.page-header > h2');
 
-                if(header) {
+                if (header && (header.innerHTML != lastHeader)) {
                     contentIndex.push({
                         title: header.innerHTML,
                         id: slide.getAttribute('id')
                     });
+										
+										lastHeader = header.innerHTML;
                 }
             });
 
@@ -776,6 +855,8 @@
 					var mediaStreamSource = null;
 
 					function gotStream(stream) {
+						startPitch();
+						
 						// Create an AudioNode from the stream.
 						mediaStreamSource = audioContext.createMediaStreamSource(stream);
 
@@ -790,12 +871,12 @@
 					var lastNotClip = 0;
 
 					function nextSlideChecker(clip) {
-						console.log(clip);
+						//console.log(clip);
 						if (!clip) lastNotClip = window.performance.now();
 				 if (clip) {
 					 if ((lastNotClip != 0) && (lastNotClip + 1000 < window.performance.now())) {
 						 lastNotClip = 0;
-						 impress().next();
+						 if (!(document.body.classList.contains("guitarLocked"))) impress().next();
 					 }
 				 }
 					}
@@ -807,9 +888,11 @@
 						// check if we're currently clipping
 						if (meter.checkClipping()) {
 							//canvasContext.fillStyle = "red";
+							document.body.classList.add("clipping");
 							nextSlideChecker(true);
 						} else {
 							//canvasContext.fillStyle = "green";
+							document.body.classList.remove("clipping");
 							nextSlideChecker(false);
 						}
 
@@ -819,8 +902,14 @@
 						// set up the next visual callback
 						rafID = window.requestAnimationFrame( drawLoop );
 					}
+					
+					window.addEventListener("keypress", function(ev) { 
+						if (ev.which == 122) document.body.classList.toggle("guitarLocked");
+					});
 
 				})();
         </script>
+        <script type="text/jsx" src="js/react.js"></script>
+        <script src="pd/js/pitchdetect.js"></script>
     </body>
 </html>

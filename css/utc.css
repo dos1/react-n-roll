@@ -179,7 +179,7 @@ body {
 		line-height: 1.1;
 	}
 
-	#slide1 .page-footer {
+	#slide1 .page-footer, .page-footer.bottom {
 		bottom: 1.5em;
 		position: absolute;
 		right: 1.5em;
